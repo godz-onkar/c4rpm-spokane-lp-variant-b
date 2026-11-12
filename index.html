@@ -72,6 +72,15 @@ img{max-width:100%;display:block}
 .opt:hover{border-color:var(--action)}
 .opt[aria-pressed="true"]{border-color:var(--action);background:#DDEFF5;box-shadow:inset 0 0 0 1px var(--action);font-weight:600}
 .card .btn{width:100%;margin-top:22px}
+.opts.one{grid-template-columns:minmax(0,1fr)}
+.opt{justify-content:flex-start;text-align:left}
+.opts:not(.one) .opt{justify-content:center;text-align:center}
+.back{margin-top:12px;min-height:44px;padding:0 4px;border:0;background:none;color:var(--ink-2);font-family:var(--body);font-size:16px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.fields{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.lbl{display:block;font-size:15px;font-weight:600}
+.inp{display:block;width:100%;margin-top:6px;min-height:52px;padding:12px 14px;border:1px solid var(--line-2);border-radius:6px;background:#fff;font-family:var(--body);font-size:17px;color:var(--ink)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5;color:var(--ink-2)}
+.consent input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--action)}
 .pv{margin-top:10px;font-size:13px;color:var(--ink-2);text-align:center}
 .askcall{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:16px;text-align:center}
 .askcall a{font-weight:700;text-decoration:none;color:var(--action)}
@@ -181,7 +190,7 @@ img{max-width:100%;display:block}
 </style>
 </head>
 <body>
-<div class="prev-flag">Layout preview of variant B for review. The survey here is a static mock; the live GHL survey loads in this card. Build notes are at the bottom.</div>
+<div class="prev-flag">Layout preview of variant B for review. The survey here is a clickable mock; the live GHL survey loads in this card. Build notes are at the bottom.</div>
 
 <header class="hdr">
   <div class="wrap">
@@ -212,24 +221,21 @@ img{max-width:100%;display:block}
       <div class="c5" id="survey" style="scroll-margin-top:96px">
         <div class="card" role="group" aria-labelledby="sv-h">
           <h2 class="card-h" id="sv-h">See if you’re a candidate</h2>
-          <div class="prog"><span>Step 1 of 3</span><span class="bar" aria-hidden="true"><span></span></span></div>
-          <p class="q" id="q1">Where are you experiencing pain?</p>
-          <div class="opts" role="group" aria-labelledby="q1">
-            <button class="opt" type="button" aria-pressed="false">Knee</button><button class="opt" type="button" aria-pressed="false">Hip</button>
-            <button class="opt" type="button" aria-pressed="false">Shoulder</button><button class="opt" type="button" aria-pressed="false">Back or neck</button>
-            <button class="opt" type="button" aria-pressed="false">More than one</button><button class="opt" type="button" aria-pressed="false">Somewhere else</button>
+          <div class="prog"><span id="pg-t">Question 1 of 6</span><span class="bar" aria-hidden="true"><span id="pg-b"></span></span></div>
+          <div id="qs" aria-live="polite">
+            <div class="qstep" data-q="1"><p class="q">Where are you experiencing pain?</p><div class="opts"><button class="opt" type="button">Knee</button><button class="opt" type="button">Hip</button><button class="opt" type="button">Shoulder</button><button class="opt" type="button">Back or neck</button><button class="opt" type="button">More than one</button><button class="opt" type="button">Somewhere else</button></div></div>
+            <div class="qstep" data-q="2" hidden><p class="q">Choose your age range</p><div class="opts"><button class="opt" type="button">65 or older</button><button class="opt" type="button">55 to 64</button><button class="opt" type="button">45 to 54</button><button class="opt" type="button">Under 45</button></div></div>
+            <div class="qstep" data-q="3" hidden><p class="q">How long have you been experiencing the pain?</p><div class="opts one"><button class="opt" type="button">Less than 3 months</button><button class="opt" type="button">3–12 months</button><button class="opt" type="button">Over a year</button></div></div>
+            <div class="qstep" data-q="4" hidden><p class="q">How is this pain affecting your daily activities?</p><div class="opts one"><button class="opt" type="button">Limiting exercise or work</button><button class="opt" type="button">Limiting walking, lifting, or movement</button><button class="opt" type="button">Occasional discomfort but getting worse</button><button class="opt" type="button">Severe pain that impacts daily life</button><button class="opt" type="button">Not sure / just gathering information</button></div></div>
+            <div class="qstep" data-q="5" hidden><p class="q">Are you able to visit our Spokane or Post Falls clinic for care?</p><div class="opts one"><button class="opt" type="button">Yes, I’m local or can travel</button><button class="opt" type="button">No, I’m not able to get to either location</button></div></div>
+            <div class="qstep" data-q="6" hidden><p class="q">Some of our advanced non-surgical treatments may be private pay or out-of-network. Are you comfortable reviewing these options?</p><div class="opts one"><button class="opt" type="button">Yes</button><button class="opt" type="button">No</button></div></div>
+            <div class="qstep" data-q="7" hidden><p class="q">Where should our team reach you?</p>
+              <div class="fields"><label class="lbl">Full name<input class="inp" type="text" autocomplete="name"></label><label class="lbl">Phone<input class="inp" type="tel" autocomplete="tel" inputmode="tel"></label><label class="lbl">Email<input class="inp" type="email" autocomplete="email"></label><label class="lbl">ZIP code<input class="inp" type="text" autocomplete="postal-code" inputmode="numeric"></label>
+              <label class="consent"><input type="checkbox"> I agree to terms &amp; conditions provided by the company. By providing my phone number, I agree to receive text messages from the business.</label></div>
+              <button class="btn" type="button" id="send">Submit</button></div>
           </div>
-          <p class="q" id="q2">Choose your age range</p>
-          <div class="opts" role="group" aria-labelledby="q2">
-            <button class="opt" type="button" aria-pressed="false">65 or older</button><button class="opt" type="button" aria-pressed="false">55 to 64</button>
-            <button class="opt" type="button" aria-pressed="false">45 to 54</button><button class="opt" type="button" aria-pressed="false">Under 45</button>
-          </div>
-          <p class="q" id="q3">How long have you been experiencing the pain?</p>
-          <div class="opts three" role="group" aria-labelledby="q3">
-            <button class="opt" type="button" aria-pressed="false">Less than 3 months</button><button class="opt" type="button" aria-pressed="false">3–12 months</button><button class="opt" type="button" aria-pressed="false">Over a year</button>
-          </div>
-          <button class="btn" type="button" id="next">Next</button>
-          <p class="pv" id="pv" aria-live="polite"></p>
+          <button class="back" type="button" id="back" hidden>Back</button>
+          <p class="pv" id="pv"></p>
           <p class="askcall">Questions first? Call <a href="tel:+15095887340">(509) 588-7340</a>.</p>
         </div>
       </div>
@@ -360,7 +366,8 @@ img{max-width:100%;display:block}
     <ul>
       <li>Duplicate the live survey as Survey B (same questions, answers, order, redirect). Tag submits <code>lead-variation-b</code>; add <code>lead-variation-a</code> to the live survey.</li>
       <li>Every workflow the live survey triggers must also trigger on Survey B.</li>
-      <li>The answer buttons in this preview are a mock. Use the live survey's questions and answers exactly.</li>
+      <li>One question per screen: each tap moves to the next question, with a Back link and "Question N of 6". Contact details come last. Same questions and answers as the live survey, split one per slide.</li>
+      <li>Answer options for the pain area, age range and the private-pay question are a mock; use the live survey’s options exactly.</li>
       <li>Built-in GHL Survey element in the hero card, not an iframe. Step 1 answers as large tap buttons if GHL allows it. The card heading and "Questions first?" line sit around the element.</li>
     </ul>
     <h3>Section by section</h3>
@@ -394,18 +401,30 @@ img{max-width:100%;display:block}
 </aside>
 
 <script>
-document.querySelectorAll('.opts').forEach(function(g){
-  g.addEventListener('click',function(e){
-    var b=e.target.closest('.opt');if(!b)return;
-    g.querySelectorAll('.opt').forEach(function(o){o.setAttribute('aria-pressed','false')});
-    b.setAttribute('aria-pressed','true');
+(function(){
+  var steps=[].slice.call(document.querySelectorAll('.qstep')),i=0,total=6;
+  var t=document.getElementById('pg-t'),b=document.getElementById('pg-b'),back=document.getElementById('back'),pv=document.getElementById('pv');
+  function show(n){
+    steps.forEach(function(el,k){el.hidden=k!==n});
+    i=n;
+    t.textContent=n<total?('Question '+(n+1)+' of '+total):'Last step: your contact details';
+    b.style.width=Math.round(((n+1)/(total+1))*100)+'%';
+    back.hidden=n===0;pv.textContent='';
+  }
+  steps.forEach(function(el,k){
+    el.addEventListener('click',function(e){
+      var o=e.target.closest('.opt');if(!o)return;
+      el.querySelectorAll('.opt').forEach(function(x){x.setAttribute('aria-pressed','false')});
+      o.setAttribute('aria-pressed','true');
+      setTimeout(function(){show(Math.min(k+1,steps.length-1))},220);
+    });
   });
-});
-document.getElementById('next').addEventListener('click',function(){
-  document.getElementById('pv').textContent='Preview only. On the live page, this goes to step 2 of the GHL survey.';
-});
-var sv=document.getElementById('survey'),mb=document.querySelector('.mbar');
-if('IntersectionObserver' in window&&sv&&mb){new IntersectionObserver(function(es){es.forEach(function(e){mb.classList.toggle('away',e.isIntersecting)})},{threshold:0.15}).observe(sv);}
+  back.addEventListener('click',function(){show(Math.max(i-1,0))});
+  document.getElementById('send').addEventListener('click',function(){pv.textContent='Preview only. On the live page, this submits the GHL survey and goes to the booking page.'});
+  show(0);
+  var sv=document.getElementById('survey'),mb=document.querySelector('.mbar');
+  if('IntersectionObserver' in window&&sv&&mb){new IntersectionObserver(function(es){es.forEach(function(e){mb.classList.toggle('away',e.isIntersecting)})},{threshold:0.15}).observe(sv);}
+})();
 </script>
 </body>
 </html>
