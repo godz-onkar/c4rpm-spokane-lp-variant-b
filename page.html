@@ -530,7 +530,7 @@ img{max-width:100%;display:block}
   document.getElementById('send').addEventListener('click',function(){pv.textContent='Preview only. On the live page, this submits the GHL survey and goes to the booking page.'});
   show(0);
   var rv=document.getElementById('revs');
-  document.querySelectorAll('.rnav').forEach(function(b){b.addEventListener('click',function(){rv.scrollBy({left:(+b.dataset.d)*rv.clientWidth,behavior:'smooth'})})});
+  document.querySelectorAll('.rnav').forEach(function(b){b.addEventListener('click',function(){rv.scrollLeft+=(+b.dataset.d)*rv.clientWidth})});
   var sv=document.getElementById('survey'),mb=document.querySelector('.mbar');
   if('IntersectionObserver' in window&&sv&&mb){new IntersectionObserver(function(es){es.forEach(function(e){mb.classList.toggle('away',e.isIntersecting)})},{threshold:0.15}).observe(sv);}
 })();
