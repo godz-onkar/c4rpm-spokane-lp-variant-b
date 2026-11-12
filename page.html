@@ -114,25 +114,30 @@ img{max-width:100%;display:block}
 .quote cite{display:block;margin-top:10px;font-style:normal;font-size:15px;color:#B9D3DE}
 .band .btn{margin-top:32px}
 /* proof */
-.vids{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:14px;margin-top:32px}
-.pvid{position:relative;border-radius:10px;background:var(--navy);color:#EAF3F7;min-height:190px;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;overflow:hidden}
-.pvid.big{grid-row:span 2;min-height:394px}
-.pvid.wide{grid-column:span 2}
+.vids{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:32px}
+.pvid{position:relative;border-radius:10px;background:var(--navy);color:#EAF3F7;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;overflow:hidden}
 .play{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--navy)}
 .pvid b{font-size:15px}
 .pvid span{font-size:13px;color:#B9D3DE}
-.revs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
-.rev{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.revhead{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}
+.rnav{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);background:#fff;color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .15s ease-out}
+.rnav:hover{border-color:var(--action)}
+.revs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin-top:12px;scrollbar-width:none;scroll-behavior:smooth}
+.revs::-webkit-scrollbar{display:none}
+.rev{flex:0 0 calc((100% - 28px)/3);scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:12px}
 .rev .tag{font-weight:700;font-size:16px;line-height:1.35}
 .sk{display:block;height:9px;border-radius:5px;background:#E3ECF1}
 .rev .src{margin-top:auto;font-size:13.5px;color:var(--ink-2);display:flex;align-items:center;gap:8px}
 .rv-note{margin-top:18px;font-size:14.5px;color:var(--ink-2)}
 /* locations */
 .locs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,40px);margin-top:28px}
-.map{aspect-ratio:16/9;border-radius:10px;background:var(--canvas-alt);border:1px dashed var(--line-2);display:flex;align-items:center;justify-content:center;color:var(--ink-2);font-size:14.5px;text-align:center;padding:16px}
+.map{height:180px;border-radius:10px;background:var(--canvas-alt);border:1px dashed var(--line-2);display:flex;align-items:center;justify-content:center;color:var(--ink-2);font-size:14.5px;text-align:center;padding:16px}
 .loc h3{margin-top:18px;font-family:var(--display);text-transform:uppercase;font-size:24px}
 .loc p{margin-top:6px;color:var(--ink-2)}
 .loc .call{margin-top:6px;justify-content:flex-start;padding:0}
+.dir{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:700;text-decoration:none;color:var(--action)}
+.dir:hover{text-decoration:underline;text-underline-offset:3px}
+.loc-links{display:flex;flex-wrap:wrap;gap:4px 24px}
 /* faq */
 .fq{border-top:1px solid var(--line)}
 .fq:last-child{border-bottom:1px solid var(--line)}
@@ -193,37 +198,58 @@ img{max-width:100%;display:block}
 .notes table{border-collapse:collapse;margin-top:12px;width:100%;font-size:15px}
 .notes th,.notes td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
 .prev-flag{background:#FDF3D8;color:#5A440C;font-size:12.5px;text-align:center;padding:8px 16px}
-@media (max-width:900px){.vals{grid-template-columns:minmax(0,1fr)}.path{grid-template-columns:minmax(0,1fr);gap:32px}.path::before{top:44px;bottom:44px;left:43px;right:auto;width:2px;height:auto}.path li{padding-left:112px;min-height:88px}.path .node{position:absolute;left:0;top:0}.ph3{margin-top:4px}.steps{grid-template-columns:minmax(0,1fr)}.revs{grid-template-columns:repeat(2,minmax(0,1fr))}.vids{grid-template-columns:1fr 1fr}.pvid.big{grid-column:span 2;grid-row:auto;min-height:260px}.pvid.wide{grid-column:auto}}
+@media (max-width:900px){.vals{grid-template-columns:minmax(0,1fr)}.path{grid-template-columns:minmax(0,1fr);gap:32px}.path::before{top:44px;bottom:44px;left:43px;right:auto;width:2px;height:auto}.path li{padding-left:112px;min-height:88px}.path .node{position:absolute;left:0;top:0}.ph3{margin-top:4px}.steps{grid-template-columns:minmax(0,1fr)}.rev{flex-basis:calc((100% - 14px)/2)}.vids{grid-template-columns:1fr 1fr}}
 @media (max-width:640px){
   body{font-size:18px}
   .hdr .btn{display:none}
   .logo img{height:30px}
+  .hero{padding-top:20px}
   .hero-head{text-align:left}
+  .rating{font-size:14px}.rating .stars{font-size:15px}
+  .hero-head .eyebrow{margin-top:4px!important;font-size:11.5px}
+  .h1{font-size:32px;margin-top:8px!important}
+  .hero .lede{font-size:16.5px;line-height:1.5;margin-top:10px}
+  .hero-grid{margin-top:18px}
+  .vcap{margin-top:8px;font-size:13.5px}
   .ring-arc{display:none}
-  .trust li{flex-basis:100%;padding:14px 0}
+  .trust{margin-top:28px}
+  .trust li{flex-basis:100%;padding:9px 0;font-size:15.5px}
   .trust li+li{padding-left:0;border-left:0;border-top:1px solid var(--line)}
-  .locs{grid-template-columns:minmax(0,1fr)}
-  .tiles{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px}
-  .tile{flex:0 0 58%;scroll-snap-align:start}
-  .wphoto{aspect-ratio:auto;min-height:220px}
-  .node{width:64px;height:64px;font-size:30px}
-  .path::before{left:31px;top:32px;bottom:32px}
-  .path li{padding-left:84px;min-height:64px}
-  .ac summary{font-size:21px}
-  .why .c5{order:-1}
-  .revs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px}
-  .rev{flex:0 0 82%;scroll-snap-align:start}
-  .photo{aspect-ratio:auto;min-height:220px}
-  .sec .btn,.final .btn{width:100%}
+  .sec{padding-top:48px;padding-bottom:48px}
+  .h2{font-size:27px}
+  .vals{margin-top:20px;gap:12px}
+  .val{padding:20px;gap:8px}.val p{font-size:16.5px}.val-num .big{font-size:48px}
+  .tiles{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px;margin-top:18px}
+  .tile{flex:0 0 52%;aspect-ratio:4/5;scroll-snap-align:start}
+  .tl{font-size:21px}
+  .path{margin-top:24px;gap:24px}
+  .node{width:52px;height:52px;font-size:26px;border-width:2px}
+  .path::before{left:25px;top:26px;bottom:26px}
+  .path li{padding-left:70px;min-height:52px}
+  .ph3{font-size:20px}.path p{font-size:17px;margin-top:6px}
+  .ac summary{font-size:18px;min-height:52px;padding:14px 0}
+  .ac p{font-size:17px}
+  .wphoto{aspect-ratio:auto;min-height:160px}
+  .photo{aspect-ratio:auto;min-height:180px}
+  .bio{font-size:17px}.quote{font-size:19px}
+  .vids{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px;margin-top:20px}
+  .pvid{flex:0 0 72%;min-height:200px;scroll-snap-align:start}
+  .revhead{display:none}
+  .revs{gap:12px;padding-bottom:6px}
+  .rev{flex:0 0 82%}
+  .locs{grid-template-columns:minmax(0,1fr);margin-top:16px}
+  .map{display:none}
+  .loc h3{margin-top:4px}
+  .fq summary{font-size:18px;min-height:52px;padding:14px 0}
+  .fq p{font-size:17px}
+  .sec .btn{display:none}
+  .final .btn{width:100%}
+  .fband{padding:44px 20px}
   .mbar.away{display:none}
-  .map{aspect-ratio:2.6/1}
   .ftr{padding-bottom:96px}
-  .vids{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px}
-  .pvid,.pvid.big{flex:0 0 78%;min-height:240px;scroll-snap-align:start}
   .opts.three{grid-template-columns:minmax(0,1fr)}
   .mbar{display:block;position:sticky;bottom:0;z-index:40;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(245,249,251,.97);border-top:1px solid var(--line)}
   .mbar .btn{width:100%;font-size:17px;padding:0 14px;text-align:center}
-  .h1{font-size:38px}
 }
 @media (max-width:420px){.hide-xs{display:none}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
@@ -367,7 +393,8 @@ img{max-width:100%;display:block}
       <div class="pvid"><span class="play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span><b>Patient video 3</b><span>Shoulder</span></div>
       <div class="pvid wide"><span class="play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span><b>Patient video 4</b><span>Knee</span></div>
     </div>
-    <div class="revs">
+    <div class="revhead"><button class="rnav" type="button" data-d="-1" aria-label="Previous reviews"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button><button class="rnav" type="button" data-d="1" aria-label="More reviews"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button></div>
+    <div class="revs" id="revs">
       <article class="rev"><span class="stars" aria-label="5 stars">★★★★★</span><p class="tag">Avoided a partial knee replacement</p><span class="sk" style="width:96%"></span><span class="sk" style="width:88%"></span><span class="sk" style="width:62%"></span><p class="src">Google review</p></article>
       <article class="rev"><span class="stars" aria-label="5 stars">★★★★★</span><p class="tag">Neck and back, sleeping through the night again</p><span class="sk" style="width:94%"></span><span class="sk" style="width:80%"></span><span class="sk" style="width:55%"></span><p class="src">Google review</p></article>
       <article class="rev"><span class="stars" aria-label="5 stars">★★★★★</span><p class="tag">Was offered knee replacement twice</p><span class="sk" style="width:92%"></span><span class="sk" style="width:86%"></span><span class="sk" style="width:70%"></span><p class="src">Google review</p></article>
@@ -384,8 +411,8 @@ img{max-width:100%;display:block}
   <div class="wrap">
     <h2 class="disp h2">Convenient locations for your care</h2>
     <div class="locs">
-      <div class="loc"><div class="map">Map: 3124 S. Regal St., Spokane</div><h3>Spokane</h3><p>3124 S. Regal St., Spokane, WA 99223<br>Monday to Friday, 8 a.m. to 5 p.m.</p><a class="call" href="tel:+15095887340">(509) 588-7340</a></div>
-      <div class="loc"><div class="map">Map: 509 W. Hanley Ave., Coeur d’Alene</div><h3>Coeur d’Alene</h3><p>509 W. Hanley Ave., Suite 101, Coeur d’Alene, ID 83815</p><a class="call" href="tel:+15095887340">(509) 588-7340</a></div>
+      <div class="loc"><div class="map">Map: 3124 S. Regal St., Spokane</div><h3>Spokane</h3><p>3124 S. Regal St., Spokane, WA 99223<br>Monday to Friday, 8 a.m. to 5 p.m.</p><div class="loc-links"><a class="call" href="tel:+15095887340">(509) 588-7340</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=3124+S+Regal+St+Spokane+WA+99223">Get directions</a></div></div>
+      <div class="loc"><div class="map">Map: 509 W. Hanley Ave., Coeur d’Alene</div><h3>Coeur d’Alene</h3><p>509 W. Hanley Ave., Suite 101, Coeur d’Alene, ID 83815</p><div class="loc-links"><a class="call" href="tel:+15095887340">(509) 588-7340</a><a class="dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=509+W+Hanley+Ave+Suite+101+Coeur+d%27Alene+ID+83815">Get directions</a></div></div>
     </div>
   </div>
 </section>
@@ -502,6 +529,8 @@ img{max-width:100%;display:block}
   back.addEventListener('click',function(){show(Math.max(i-1,0))});
   document.getElementById('send').addEventListener('click',function(){pv.textContent='Preview only. On the live page, this submits the GHL survey and goes to the booking page.'});
   show(0);
+  var rv=document.getElementById('revs');
+  document.querySelectorAll('.rnav').forEach(function(b){b.addEventListener('click',function(){rv.scrollBy({left:(+b.dataset.d)*rv.clientWidth,behavior:'smooth'})})});
   var sv=document.getElementById('survey'),mb=document.querySelector('.mbar');
   if('IntersectionObserver' in window&&sv&&mb){new IntersectionObserver(function(es){es.forEach(function(e){mb.classList.toggle('away',e.isIntersecting)})},{threshold:0.15}).observe(sv);}
 })();
